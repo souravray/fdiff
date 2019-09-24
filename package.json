@@ -1,0 +1,29 @@
+{
+  "name": "fdiff",
+  "version": "1.0.0",
+  "description": "Node.js Flie Diff module",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/souravray/fdiff.git"
+  },
+  "keywords": [
+    "diff",
+    "lcs",
+    "myers"
+  ],
+  "author": "Sourav Ray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/souravray/fdiff/issues"
+  },
+  "homepage": "https://github.com/souravray/fdiff#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1"
+  }
+}
