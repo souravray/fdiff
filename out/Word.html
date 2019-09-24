@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Diff</title>
+    <title>JSDoc: Class: Word</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Diff</h1>
+    <h1 class="page-title">Class: Word</h1>
 
     
 
@@ -28,10 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Diff<span class="signature">(pref)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Word<span class="signature">(pref, rLine, lLine)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Diff base class that implements
-a LCS algotrithm</div>
+            <div class="class-description">Word class implements
+Diff class bastruct methods</div>
         
     
 </header>
@@ -46,7 +46,7 @@ a LCS algotrithm</div>
     
 
     
-    <h4 class="name" id="Diff"><span class="type-signature"></span>new Diff<span class="signature">(pref)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Word"><span class="type-signature"></span>new Word<span class="signature">(pref, rLine, lLine)</span><span class="type-signature"></span></h4>
     
 
     
@@ -106,6 +106,52 @@ a LCS algotrithm</div>
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>rLine</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">right hand string of words</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lLine</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">left hand string of words</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -143,7 +189,7 @@ a LCS algotrithm</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="diff.js.html">diff.js</a>, <a href="diff.js.html#line12">line 12</a>
+        <a href="word.js.html">word.js</a>, <a href="word.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -166,18 +212,6 @@ a LCS algotrithm</div>
 
 
 
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
-    
-        error if called outside a child class
-    
-    </div>
-
-
-    
 
 
 
@@ -211,7 +245,7 @@ a LCS algotrithm</div>
     
 
     
-    <h4 class="name" id=".compare(Abstruct)method"><span class="type-signature">(static) </span>compare (Abstruct) method<span class="signature">(elR, elL)</span><span class="type-signature"> &rarr; {bool}</span></h4>
+    <h4 class="name" id=".compare(Abstruct)method"><span class="type-signature">(static) </span>compare (Abstruct) method<span class="signature">(rWord, lWord)</span><span class="type-signature"> &rarr; {bool}</span></h4>
     
 
     
@@ -251,13 +285,13 @@ a LCS algotrithm</div>
 
         <tr>
             
-                <td class="name"><code>elR</code></td>
+                <td class="name"><code>rWord</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -267,20 +301,20 @@ a LCS algotrithm</div>
 
             
 
-            <td class="description last">right element</td>
+            <td class="description last">right word</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>elL</code></td>
+                <td class="name"><code>lWord</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
@@ -290,7 +324,7 @@ a LCS algotrithm</div>
 
             
 
-            <td class="description last">left element</td>
+            <td class="description last">left word</td>
         </tr>
 
     
@@ -331,7 +365,7 @@ a LCS algotrithm</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="diff.js.html">diff.js</a>, <a href="diff.js.html#line40">line 40</a>
+        <a href="word.js.html">word.js</a>, <a href="word.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -354,25 +388,13 @@ a LCS algotrithm</div>
 
 
 
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
-    
-        error if not implemented by child class
-    
-    </div>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    true if elR==elL or else false
+    true if both sides are equal or else false
 </div>
 
 
@@ -390,162 +412,6 @@ a LCS algotrithm</div>
 </dl>
 
     
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".initmethod"><span class="type-signature">(static) </span>init method<span class="signature">(rSet, lSet)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>rSet</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">right set of comparable data</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lSet</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">left set of comparable data</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="diff.js.html">diff.js</a>, <a href="diff.js.html#line26">line 26</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

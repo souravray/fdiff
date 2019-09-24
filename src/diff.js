@@ -6,7 +6,6 @@
  */
  class Diff {
   /**
-   * @function constructor method
    * @param {string} pref string prefix for the location description 
    * @throws  error if called outside a child class
    */
@@ -25,6 +24,7 @@
   }
 
   /**
+   *  @memberof Diff
    *  @function init method
    *  @param {Array} rSet right set of comparable data
    *  @param {Array} lSet left set of comparable data
@@ -38,6 +38,7 @@
   }
 
   /**
+   *  @memberof Diff
    *  @function compare (Abstruct) method
    *  @param {object} elR right element
    *  @param {object} elL left element
@@ -49,6 +50,7 @@
   }
 
   /**
+   *  @memberof Diff
    *  computs an edit graph to find
    *  longest common subsiquent between Right Set and Left Set.
    *  @function computeMatrix method 
@@ -76,6 +78,7 @@
   }
 
    /**
+   *  @memberof Diff
    *  travers through the LCS graph and compute the diff
    *  @function findDiff method
    *  @return {Array} Array of diffs
@@ -125,7 +128,7 @@
   }
 
   /**
-   *
+   *  @memberof Diff
    *  @function _diff 
    *  @private 
    *  @param {number} rStart starting coordinate i
