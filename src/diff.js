@@ -56,23 +56,21 @@
    */
   computeMatrix() {
     const d = this
+    console.log("\t" +d._lSet.join("\t"));
     d._rSet.forEach( (elR, i) => {
-      // boolean flag to stop copmaring once a match
-      // is foiund for the row
-      let matchFound = false
       d._matrix[i] = new Array(d._lSet.length).fill(0)
       d._lSet.forEach( (elL, j) => {
-        if (!matchFound && !!d.compare(elR, elL)) {
-          let left = (j==0)? 0 : d._matrix[i][j-1]
-          d._matrix[i][j] = 1 + left
+        if (!!d.compare(elR, elL)) {
+          let topLeft = (i==0 || j==0)? 0 : d._matrix[i-1][j-1]
+          d._matrix[i][j] = 1 + topLeft
           d._matchlen = d._matrix[i][j]
-          matchFound = true
         } else {
           let top = (i==0)? 0:d._matrix[i-1][j],
               left = (j==0)? 0:d._matrix[i][j-1]
           d._matrix[i][j] = Math.max(top, left)
         }
       })
+      console.log(d._rSet[i] + "\t" + d._matrix[i].join("\t"));
     })
     return this._matchlen;
   }
@@ -87,7 +85,6 @@
     // and Left hand set a added if there is zero match
     if (this._matchlen == 0) {
       let diffs = [this._diff(this._start, this._rEnd, this._start, this._lEnd)]
-      console.log(JSON.stringify(diffs, null, 2));
       return diffs
     } 
 
