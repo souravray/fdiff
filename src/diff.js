@@ -6,14 +6,12 @@
  */
  class Diff {
   /**
-   * @param {string} pref string prefix for the location description 
    * @throws  error if called outside a child class
    */
-  constructor(pref) {
+  constructor() {
     if (new.target === Diff) {
       throw new Error('Cannot construct direct instance Diff class');
     }
-    this._pref = pref || '';
     this._rSet = [];
     this._lSet = [];
     this._matrix = [];
@@ -58,7 +56,7 @@
    */
   computeMatrix() {
     const d = this
-    console.log("\t" +d._lSet.join("\t"));
+    console.log("\t\t\t",d._lSet.join("   "));
     d._rSet.forEach( (elR, i) => {
       d._matrix[i] = new Array(d._lSet.length).fill(0)
       d._lSet.forEach( (elL, j) => {
@@ -72,7 +70,7 @@
           d._matrix[i][j] = Math.max(top, left)
         }
       })
-      console.log(d._rSet[i] + "\t" + d._matrix[i].join("\t"));
+      console.log(d._rSet[i]+"\t\t\t" + d._matrix[i].join("\t\t"));
     })
     return this._matchlen;
   }
@@ -90,7 +88,6 @@
       let diffs = [this._diff(this._start, this._rEnd, this._start, this._lEnd)]
       return diffs
     } 
-
     let diffs = new Array(),
         previ = this._rEnd, // refernce co-ordinate from where 
         prevj = this._lEnd  // the matching started
@@ -109,8 +106,8 @@
           if((previ-i) > 1 || (prevj-j) > 1 ) {
             diffs.unshift(this._diff(i, previ, j, prevj))
           }
-          matched = true // circuit breake 
-          previ=i // update the ref-coordiantes
+          matched = true  // circuit breake 
+          previ=i         // update the ref-coordiantes
           prevj=j
         } else if(cval>lval) {
           i -= 1
@@ -119,7 +116,6 @@
         }
       } while(!matched && (i>-1 && j>-1) )
     }
-
     // check if the is diff at the begining 
     if(previ>0 || prevj>0) {
       diffs.unshift(this._diff(this._start, previ, this._start, prevj))
@@ -138,12 +134,15 @@
    *  @return {Object} Diff object
    */
   _diff(rStart, rEnd, lStart, lEnd) {
-    let key = this._pref + ' btween '
-              + (rStart+1) + " to "
-              + (rEnd+1)
     let deleted = this._rSet.slice(rStart+1, rEnd)
     let added = this._lSet.slice(lStart+1, lEnd)
-    return { key: key,del:deleted, add: added}
+    return { coords: {
+                r: {prev:rStart, next:rEnd},
+                l: {prev:lStart, next:lEnd}
+              },
+              del:deleted,
+              add: added
+            }
   }
 }
 
