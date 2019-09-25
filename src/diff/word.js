@@ -1,12 +1,13 @@
 "use strict";
 
-const Diff = require('./diff')
+const LCS = require('./lcs')
 
 /**
+ * @namespace diff
  * @class Word class implements
- * Diff class bastruct methods
+ * LCS class abstruct methods
  */
-class Word extends Diff {
+class Word extends LCS {
   /**
    * @param {string} rLine right hand string of words
    * @param {string} lLine left hand string of words

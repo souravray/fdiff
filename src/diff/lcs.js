@@ -1,16 +1,17 @@
 "use strict";
 
 /**
- * @class Diff base class that implements
+ * @namespace diff
+ * @class LCS base class for diff, that implements
  * a LCS algotrithm
  */
- class Diff {
+ class LCS {
   /**
    * @throws  error if called outside a child class
    */
   constructor() {
-    if (new.target === Diff) {
-      throw new Error('Cannot construct direct instance Diff class');
+    if (new.target === LCS) {
+      throw new Error('Cannot construct direct instance LCS class');
     }
     this._rSet = [];
     this._lSet = [];
@@ -22,7 +23,7 @@
   }
 
   /**
-   *  @memberof Diff
+   *  @memberof LCS
    *  @function init method
    *  @param {Array} rSet right set of comparable data
    *  @param {Array} lSet left set of comparable data
@@ -36,7 +37,7 @@
   }
 
   /**
-   *  @memberof Diff
+   *  @memberof LCS
    *  @function compare (Abstruct) method
    *  @param {object} elR right element
    *  @param {object} elL left element
@@ -48,7 +49,7 @@
   }
 
   /**
-   *  @memberof Diff
+   *  @memberof LCS
    *  computs an edit graph to find
    *  longest common subsiquent between Right Set and Left Set.
    *  @function computeMatrix method 
@@ -76,7 +77,7 @@
   }
 
    /**
-   *  @memberof Diff
+   *  @memberof LCS
    *  travers through the LCS graph and compute the diff
    *  @function findDiff method
    *  @return {Array} Array of diffs
@@ -124,7 +125,7 @@
   }
 
   /**
-   *  @memberof Diff
+   *  @memberof LCS
    *  @function _diff 
    *  @private 
    *  @param {number} rStart starting coordinate i
@@ -146,4 +147,4 @@
   }
 }
 
-module.exports = Diff
+module.exports = LCS

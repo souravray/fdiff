@@ -1,13 +1,14 @@
 "use strict";
 
-const Diff = require('./diff'),
+const LCS = require('./lcs'),
       crypto = require('crypto')
 
 /**
+ * @namespace diff
  * @class Line class implements
- * Diff class bastruct methods
+ * LCS class abstruct methods
  */
-class Line extends Diff {
+class Line extends LCS {
   /**
    * @param {Buffer} rData right hand blob of lines
    * @param {Buffer} lData left hand blob of lines
