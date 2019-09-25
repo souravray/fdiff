@@ -3,7 +3,6 @@
 const LCS = require('./lcs')
 
 /**
- * @namespace diff
  * @class Word class implements
  * LCS class abstruct methods
  */

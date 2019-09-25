@@ -1,7 +1,6 @@
 "use strict";
 
 /**
- * @namespace diff
  * @class LCS base class for diff, that implements
  * a LCS algotrithm
  */
@@ -141,7 +140,7 @@
                 r: {prev:rStart, next:rEnd},
                 l: {prev:lStart, next:lEnd}
               },
-              del:deleted,
+              del: deleted,
               add: added
             }
   }

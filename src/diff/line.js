@@ -4,7 +4,6 @@ const LCS = require('./lcs'),
       crypto = require('crypto')
 
 /**
- * @namespace diff
  * @class Line class implements
  * LCS class abstruct methods
  */
