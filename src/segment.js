@@ -23,6 +23,16 @@ class Segment {
     this._lITree = new IntervalTree(true)
   }
 
+  /**
+   *  Flatten multi line words
+   *  ceate a lookup interval tree
+   *  to map words to original line
+   *  boundaries  
+   *  @memberof Segment
+   *  @function _mergeLines
+   *  @private
+   *  @return {Array} array of two word arrays
+   */
   _mergeLines() {
     const rLen = this._diff.del.length,
         lLen = this._diff.add.length,
@@ -52,9 +62,16 @@ class Segment {
     return [rLine, lLine]
   }
 
+/**
+   *  Find word Diff for the entire segment
+   *  @memberof Segment
+   *  @function _wordDiff
+   *  @private
+   *  @return {object} segment diff object
+   */
   _wordDiff() {
     let inputLines = this._mergeLines()
-
+    // the words are already tokenised
     let words = new Word(inputLines[0], inputLines[1], true)
     words.computeMatrix()
     let wordDiffs = words.findDiff()
@@ -68,7 +85,17 @@ class Segment {
       return {type: 'segment', coords:this._diff.coords, del: rDiff, add: lDiff}
     })
   }
- 
+
+  /**
+   *  Find word Diff for the entire segment
+   *  @memberof Segment
+   *  @function _formatDiff
+   *  @private
+   *  @param {object} node object for current line
+   *  @param {array} words array of diff words
+   *  @return {object} co-ord  reference co-ordinate
+   *  @return {object} diff phrase object
+   */
   _formatDiff(startLine, words, coord) {
     if(!startLine) {
       return []
@@ -112,6 +139,12 @@ class Segment {
     }
   }
 
+  /**
+   *  Public diff() method
+   *  @memberof Segment
+   *  @function diff
+   *  @return {object} diff segment object
+   */
   diff() {
     if (this._diff.del.length == 0) {
       return {type: 'addition', coords:this._diff.coords, add: this._diff.add}

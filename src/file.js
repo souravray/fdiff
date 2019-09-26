@@ -4,12 +4,24 @@ const fs = require('fs'),
       { Line, Word } = require('./diff'),
       Segment = require('./segment')
 
-
+/**
+ * @class Files 
+ * A simple wrapper class for expanding single line diffs
+ */
 class Files {
+  /*
+  * @param {string} rFilePath - file path for old version of the text
+  * @param {string} lFilePath - file path for new version of the text
+  */
   constructor(rFilePath, lFilePath) {
     this._FilePaths = [rFilePath, lFilePath]
   }
 
+  /*
+  * 
+  * Wrapper over fs.readFile
+  * returns a Promis
+  */
   _read(path, order) {
     return new Promise((rslv, rjct) => {
       fs.readFile(path, (err, data) => {
@@ -22,6 +34,12 @@ class Files {
     })
   }
 
+/**
+   *  read both the file concurrently
+   *  @memberof Files
+   *  @function readAll
+   *  @return {Promise} promise.All for file(S) read
+   */
   readAll() {
     const f = this 
     let readers = this._FilePaths

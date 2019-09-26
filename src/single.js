@@ -16,6 +16,13 @@ class Single {
     this._diff = diff
   }
 
+/**
+   *  Find word Diff for the line
+   *  @memberof Single
+   *  @function _wordDiff
+   *  @private
+   *  @return {object} segment diff object
+   */
   _wordDiff() {
     let words = new Word(this._diff.del[0], this._diff.add[0])
     words.computeMatrix()
@@ -25,6 +32,7 @@ class Single {
     let add = new Array()
     
     wordDiffs.forEach( diff => {
+      // stack all diff results in two buckets
       del.push(Fmt.segPhrase(lineNo,
                       Pt.nextTo(this._diff.coords.r.prev),
                       Pt.prevTo(this._diff.coords.r.next),
@@ -39,6 +47,12 @@ class Single {
     return {type: 'single', coords:this._diff.coords, del: del, add: add}
   }
 
+  /**
+   *  Public diff() method
+   *  @memberof Single
+   *  @function diff
+   *  @return {object} diff line object
+   */ 
   diff() {
     return this._wordDiff()
   }

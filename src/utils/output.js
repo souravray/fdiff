@@ -46,7 +46,7 @@ const parseMLHeader =(start, end) => {
   if (start == end) {
       return`At Line ${start+1} `
   } 
-  return `From Line ${start+1} to ${end+1}} ` 
+  return `From Line ${start+1} to ${end+1} ` 
 }
 
 module.exports = {
@@ -84,8 +84,8 @@ module.exports = {
  */
   fmtSegment(diff, oldName, newName) {
     let res = {},
-      rlines = parseMLHeader(Pt.nextTo(diff.coords.r.prev), Pt.prevTo(diff.coords.r.prev)),
-      llines = parseMLHeader(Pt.nextTo(diff.coords.l.prev), Pt.prevTo(diff.coords.l.prev))
+      rlines = parseMLHeader(Pt.nextTo(diff.coords.r.prev), Pt.prevTo(diff.coords.r.next)),
+      llines = parseMLHeader(Pt.nextTo(diff.coords.l.prev), Pt.prevTo(diff.coords.l.next))
     res.header = `${rlines} ${oldName}, ${llines} ${newName}`
     let dels =diff.del.map( d => parseWDiff(d, oldName, false)).filter( d => !!d)
     let adds =diff.add.map( d => parseWDiff(d, newName, true)).filter( d => !!d)
