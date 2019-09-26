@@ -1,6 +1,15 @@
 "use strict";
 
+/**
+ * Interval Tree Node
+ * @class Node
+ */
 class Node {
+  /**
+   * @param {number} start interval
+   * @param {number} end interval
+   * @param {number} numerical value
+   */
   constructor(start, end, value){
     this._start = start
     this._end = end
@@ -11,10 +20,23 @@ class Node {
     this._right = null;
   }
 
+  /**
+   *  Find if an index is in range
+   *  @memberof Node
+   *  @function inRange
+   *  @param {nuber} index value
+   *  @return {boolean} in-range or out-of-range
+   */
   inRange(value) {
     return value >= this._start && value <= this._end
   }
 
+  /**
+   *  @memberof Node
+   *  @function next
+   *  @param {nuber} index value
+   *  @return {object} return next node
+   */
   next(value) {
     if (this._left != null
         &&value <= this._left.max) {
@@ -27,28 +49,67 @@ class Node {
     return null
   }
 
+  /**
+   *  update the index relative 
+   *  to range offset
+   *  @memberof Node
+   *  @function reoffsetPosition
+   *  @param {nuber} index value
+   *  @return {number} offsetted index
+   */
   reoffsetPosition(val) {
     return val - this._start
   }
 
+  /**
+   *  @memberof Node
+   *  @function endPostion
+   *  @return {number} offsetted max-range index
+   */
   endPostion() {
     return this._end - this._start
   }
 }
 
+/**
+ * Interval Tree Node
+ * @class Tree
+ */
 class Tree {
+  /**
+   * @param {bool} sorted is stored array sorted
+   */
   constructor(sorted){
     this._isSrtd = sorted || false
     this._arr = new Array()
     this.root = null
   }
 
+  /**
+   *  Add new interval. This method is only allowed
+   *  until the tree is initialized
+   *  @memberof Tree
+   *  @function add
+   *  @param {nuber} start interval
+   *  @param {nuber} end interval
+   *  @param {nuber} value
+   *  @return {boolean} success; false if the tree is 
+   *  already initialized
+   */
   add(start, end, value) {
     var n = new Node(start, end, value);
     this._arr.push(n)
     return true
   }
 
+
+  /**
+   *  inser a node to tree
+   *  @memberof Tree
+   *  @function _insert
+   *  @private
+   *  @param {object} node Node object
+   */
   _insert(node) {
     if (this.root == null) {
       this.root = node
@@ -77,6 +138,13 @@ class Tree {
     } while(node._parent == null)
   }
 
+/**
+ *  sort input array (if required)
+ *  @memberof Tree
+ *  @function _sorted
+ *  @private
+ *  @return {Array} sorted Node array
+ */
   _sorted() {
     if (!this._isSrtd) {
       return this._arr.sort((n1,n2) => {
@@ -92,6 +160,12 @@ class Tree {
     return this._arr
   }
 
+/**
+ *  Lazy tree initialization
+ *  @memberof Tree
+ *  @function _lazyInit
+ *  @private
+ */
   _lazyInit() {
     if (this.root == null 
         && this._arr.length >0) {
@@ -99,6 +173,13 @@ class Tree {
     }
   }
 
+/**
+ *  Recursive Insersion from sorted array
+ *  complexity O(n)
+ *  @memberof Tree
+ *  @function _recInsert
+ *  @private
+ */
   _recInsert(arr) {
     let mindx = Math.floor(arr.length/2),
         node = arr[mindx],
@@ -113,6 +194,15 @@ class Tree {
     }
   }
 
+/**
+ *  Inplimentation method of search
+ *  @memberof Tree
+ *  @function _search
+ *  @private
+ *  @param {number} value index value
+ *  @param {object} node root node
+ *  @return {object} matching node
+ */
   _search(value, node) {
     if (this.root == null ) {
       return
@@ -127,6 +217,13 @@ class Tree {
     return this._search(value, nxtNode)
   }
 
+/**
+ *  A point search API
+ *  @memberof Tree
+ *  @function search
+ *  @param {number} value index value
+ *  @return {object} matching node
+ */
   search(value){
     this._lazyInit()
     return this._search(value, this.root)
