@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: diff/lcs.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: diff/lcs.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+
+const { Fmt } = require('../utils')
+/**
+ * @class LCS base class for diff, that implements
+ * a LCS algotrithm
+ */
+ class LCS {
+  /**
+   * @throws  error if called outside a child class
+   */
+  constructor() {
+    if (new.target === LCS) {
+      throw new Error('Cannot construct direct instance LCS class');
+    }
+    this._rSet = [];
+    this._lSet = [];
+    this._matrix = [];
+    this._matchlen = 0
+    this._start = -1
+    this._rEnd = 0
+    this._lEnd = 0
+  }
+
+  /**
+   *  @memberof LCS
+   *  @function init method
+   *  @param {Array} rSet right set of comparable data
+   *  @param {Array} lSet left set of comparable data
+   */
+  init(rSet, lSet) {
+    this._rSet = rSet
+    this._lSet = lSet
+    this._rEnd = rSet.length
+    this._lEnd = lSet.length
+    this._matrix = new Array(rSet.length)                 
+  }
+
+  /**
+   *  Abstruct method
+   *  @memberof LCS
+   *  @function compare
+   *  @param {object} elR right element
+   *  @param {object} elL left element
+   *  @return {bool} true if elR==elL or else false
+   *  @throws  error if not implemented by child class
+   */
+  compare(elR, elL) {
+    throw Error('compare method should be defined in the implementation calss');
+  }
+
+  /**
+   *  computs an edit graph to find
+   *  longest common subsiquent between Right Set and Left Set
+   *  @memberof LCS
+   *  @function computeMatrix 
+   *  @return {number} length of the LCS
+   */
+  computeMatrix() {
+    const d = this
+    d._rSet.forEach( (elR, i) => {
+      d._matrix[i] = new Array(d._lSet.length).fill(0)
+      d._lSet.forEach( (elL, j) => {
+        if (!!d.compare(elR, elL)) {
+          let topLeft = (i==0 || j==0)? 0 : d._matrix[i-1][j-1]
+          d._matrix[i][j] = 1 + topLeft
+          d._matchlen = d._matrix[i][j]
+        } else {
+          let top = (i==0)? 0:d._matrix[i-1][j],
+              left = (j==0)? 0:d._matrix[i][j-1]
+          d._matrix[i][j] = Math.max(top, left)
+        }
+      })
+    })
+    return this._matchlen;
+  }
+
+   /**
+   *  travers through the LCS graph and compute the diff
+   *  @memberof LCS
+   *  @function findDiff
+   *  @return {Array} Array of diffs
+   */
+  findDiff() {
+    // Return entrie Right hand set as deleted
+    // and Left hand set a added if there is zero match
+    if (this._matchlen == 0) {
+      let diffs = [this._diff(this._start, this._rEnd, this._start, this._lEnd)]
+      return diffs
+    } 
+    let diffs = new Array(),
+        previ = this._rEnd, // refernce co-ordinate from where 
+        prevj = this._lEnd  // the matching started
+    for(let m=0; m &lt; this._matchlen; m++) {
+      let i = previ - 1,
+          j = prevj - 1,
+          matched = false
+      // find a match
+      do {
+        let cval = this._matrix[i][j],
+            lval = (j==0)? 0 : this._matrix[i][j-1],
+            tval = (i==0)? 0 : this._matrix[i-1][j]
+        if (cval>lval &amp;&amp; cval>tval) {
+          // create a patch if there is diffrencess
+          // between two sucessive matched nodes
+          if((previ-i) > 1 || (prevj-j) > 1 ) {
+            diffs.unshift(this._diff(i, previ, j, prevj))
+          }
+          matched = true  // circuit breake 
+          previ=i         // update the ref-coordiantes
+          prevj=j
+        } else if(cval>lval) {
+          i -= 1
+        } else {
+          j -= 1
+        }
+      } while(!matched &amp;&amp; (i>-1 &amp;&amp; j>-1) )
+    }
+    // check if the is diff at the begining 
+    if(previ>0 || prevj>0) {
+      diffs.unshift(this._diff(this._start, previ, this._start, prevj))
+    }
+    return diffs
+  }
+
+  /**
+   *  @memberof LCS
+   *  @function _diff 
+   *  @private 
+   *  @param {number} rStart starting coordinate i
+   *  @param {number} rEnd starting coordinate j
+   *  @param {number} lStart end coordinate i
+   *  @param {number} lEnd end coordinate j
+   *  @return {Object} Diff object
+   */
+  _diff(rStart, rEnd, lStart, lEnd) {
+    let deleted = this._rSet.slice(rStart+1, rEnd)
+    let added = this._lSet.slice(lStart+1, lEnd)
+    return Fmt.diffObj(rStart, rEnd, lStart, lEnd, deleted, added)
+  }
+}
+
+module.exports = LCS</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-main.html">main</a></li><li><a href="module-utils_Fmt.html">utils/Fmt</a></li><li><a href="module-utils_Out.html">utils/Out</a></li><li><a href="module-utils_Pt.html">utils/Pt</a></li><li><a href="module-utils_Tokenize.html">utils/Tokenize</a></li></ul><h3>Classes</h3><ul><li><a href="Files.html">Files</a></li><li><a href="LCS.html">LCS</a></li><li><a href="Line.html">Line</a></li><li><a href="Node.html">Node</a></li><li><a href="Segment.html">Segment</a></li><li><a href="Single.html">Single</a></li><li><a href="Tree.html">Tree</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getLineDiff">getLineDiff</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Sep 26 2019 19:43:38 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
