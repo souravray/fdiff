@@ -1,0 +1,1 @@
+exports.IntervalTree = require('./ineterval-tree');
