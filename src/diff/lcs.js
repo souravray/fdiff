@@ -1,5 +1,6 @@
 "use strict";
 
+const { Fmt } = require('../utils')
 /**
  * @class LCS base class for diff, that implements
  * a LCS algotrithm
@@ -36,8 +37,9 @@
   }
 
   /**
+   *  Abstruct method
    *  @memberof LCS
-   *  @function compare (Abstruct) method
+   *  @function compare
    *  @param {object} elR right element
    *  @param {object} elL left element
    *  @return {bool} true if elR==elL or else false
@@ -48,15 +50,14 @@
   }
 
   /**
-   *  @memberof LCS
    *  computs an edit graph to find
-   *  longest common subsiquent between Right Set and Left Set.
-   *  @function computeMatrix method 
+   *  longest common subsiquent between Right Set and Left Set
+   *  @memberof LCS
+   *  @function computeMatrix 
    *  @return {number} length of the LCS
    */
   computeMatrix() {
     const d = this
-    console.log("\t\t\t",d._lSet.join("   "));
     d._rSet.forEach( (elR, i) => {
       d._matrix[i] = new Array(d._lSet.length).fill(0)
       d._lSet.forEach( (elL, j) => {
@@ -70,15 +71,14 @@
           d._matrix[i][j] = Math.max(top, left)
         }
       })
-      console.log(d._rSet[i]+"\t\t\t" + d._matrix[i].join("\t\t"));
     })
     return this._matchlen;
   }
 
    /**
-   *  @memberof LCS
    *  travers through the LCS graph and compute the diff
-   *  @function findDiff method
+   *  @memberof LCS
+   *  @function findDiff
    *  @return {Array} Array of diffs
    */
   findDiff() {
@@ -136,13 +136,7 @@
   _diff(rStart, rEnd, lStart, lEnd) {
     let deleted = this._rSet.slice(rStart+1, rEnd)
     let added = this._lSet.slice(lStart+1, lEnd)
-    return { coords: {
-                r: {prev:rStart, next:rEnd},
-                l: {prev:lStart, next:lEnd}
-              },
-              del: deleted,
-              add: added
-            }
+    return Fmt.diffObj(rStart, rEnd, lStart, lEnd, deleted, added)
   }
 }
 

@@ -1,7 +1,8 @@
 "use strict";
 
 const LCS = require('./lcs'),
-      crypto = require('crypto')
+    { Tokenize } = require('../utils'),
+    crypto = require('crypto')
 
 /**
  * @class Line class implements
@@ -15,23 +16,9 @@ class Line extends LCS {
   constructor(rData, lData, isTokenized) {
     super();
 
-    let rLines = (!!isTokenized)? rData : this._tokenize(rData),
-        lLines = (!!isTokenized)? lData : this._tokenize(lData)
+    let rLines = (!!isTokenized)? rData : Tokenize.line(rData, true),
+        lLines = (!!isTokenized)? lData : Tokenize.line(lData, true)
     this.init(rLines, lLines)
-  }
-
-  /**
-   *  @memberof Line
-   *  @function _tokenize 
-   *  @private 
-   *  @param {string} data string blob
-   *  @return {Array} lines array of sting
-   */
-  _tokenize(data) {
-    const newLine = /^(\n|\r\n)$/
-    let strData = data.toString()
-    let lines = strData.split(/(\n|\r\n)/)
-    return lines.filter( line => !newLine.test(line))
   }
 
   /**

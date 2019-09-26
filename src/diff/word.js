@@ -1,6 +1,7 @@
 "use strict";
 
-const LCS = require('./lcs')
+const LCS = require('./lcs'),
+    { Tokenize } = require('../utils')
 
 /**
  * @class Word class implements
@@ -14,8 +15,8 @@ class Word extends LCS {
   constructor(rLine, lLine, isTokenized,) {
     super();
 
-    let rWords = (!!isTokenized)? rLine :this._tokenize(rLine),
-        lWords = (!!isTokenized)? lLine : this._tokenize(lLine)
+    let rWords = (!!isTokenized)? rLine : Tokenize.word(rLine, true),
+        lWords = (!!isTokenized)? lLine : Tokenize.word(lLine, true)
     this.init(rWords, lWords)
     this.i =0
   }
