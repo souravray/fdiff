@@ -1,8 +1,20 @@
 "use strict";
+/**
+ *  @module utils/Out
+ */
 
 const chalk = require('chalk'),
       Pt = require('./pt')
 
+
+/** parse a word diff and retuen object 
+ *  with header and body
+ *  @private
+ *  @param {object} diff 
+ *  @param {string} filename
+ *  @param {bool} addition or deletion
+ *  @return {Object} word fmt message
+ */
 const parseWDiff = (wdiff, fileName, isAdd) => {
   if(!wdiff.words || wdiff.words.length == 0) {
     return
@@ -23,6 +35,13 @@ const parseWDiff = (wdiff, fileName, isAdd) => {
   return res
 }
 
+/** parse a multi-line coordinate 
+ * returns Line number string
+ *  @private
+ *  @param {number} starting coord 
+ *  @param {number} ending coord
+ *  @return {string} line string
+ */
 const parseMLHeader =(start, end) => {
   if (start == end) {
       return`At Line ${start+1} `
@@ -32,6 +51,12 @@ const parseMLHeader =(start, end) => {
 
 module.exports = {
 
+/** format a single line diff object
+ *  @param {object} diff 
+ *  @param {string} old filename
+ *  @param {string} old filename
+ *  @return {object} formated msg object
+ */
   fmtSingle(diff, oldName, newName) {
     let res = {},
         header = ""
@@ -51,6 +76,12 @@ module.exports = {
     return res
   },
   
+/** format a multiline diff object
+ *  @param {object} diff 
+ *  @param {string} old filename
+ *  @param {string} old filename
+ *  @return {object} formated msg object
+ */
   fmtSegment(diff, oldName, newName) {
     let res = {},
       rlines = parseMLHeader(Pt.nextTo(diff.coords.r.prev), Pt.prevTo(diff.coords.r.prev)),
@@ -65,6 +96,12 @@ module.exports = {
     return res
   },
 
+/** format a multiline addition object
+ *  @param {object} diff 
+ *  @param {string} old filename
+ *  @param {string} old filename
+ *  @return {object} formated msg object
+ */
   fmtAdd(diff, oldName, newName) {
     let res = {},
         header = ''
@@ -78,6 +115,12 @@ module.exports = {
     return res
   },
 
+/** format a multiline deletion object
+ *  @param {object} diff 
+ *  @param {string} old filename
+ *  @param {string} old filename
+ *  @return {object} formated msg object
+ */
   fmtDelete(diff, oldName, newName){
     let res = {},
       header = ''
