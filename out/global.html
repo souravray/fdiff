@@ -104,12 +104,16 @@
     
 
     
-    <h4 class="name" id="constructormethod"><span class="type-signature"></span>constructor method<span class="signature">(pref)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getLineDiff"><span class="type-signature"></span>getLineDiff<span class="signature">(rFile, lFile)</span><span class="type-signature"> &rarr; {promise}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    read files and return pomise for a sorted diff objects
+</div>
 
 
 
@@ -144,7 +148,7 @@
 
         <tr>
             
-                <td class="name"><code>pref</code></td>
+                <td class="name"><code>rFile</code></td>
             
 
             <td class="type">
@@ -160,7 +164,30 @@
 
             
 
-            <td class="description last">string prefix for the location description</td>
+            <td class="description last">older file path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lFile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">newer file path</td>
         </tr>
 
     
@@ -201,198 +228,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="diff.js.html">diff.js</a>, <a href="diff.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
-    
-        error if called outside a child class
-    
-    </div>
-
-
-    
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="constructormethod"><span class="type-signature"></span>constructor method<span class="signature">(pref, rData, lData)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>pref</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">string prefix for the location description</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rData</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">right hand string blob</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lData</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">left hand string blob</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="line.js.html">line.js</a>, <a href="line.js.html#line10">line 10</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -417,151 +253,28 @@
 
 
 
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="constructormethod"><span class="type-signature"></span>constructor method<span class="signature">(pref)</span><span class="type-signature"></span></h4>
-    
-
-    
+<div class="param-desc">
+    return a promise of sorted Diff objects
+</div>
 
 
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>pref</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+<span class="param-type">promise</span>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">string prefix for the location description</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="word.js.html">word.js</a>, <a href="word.js.html#line10">line 10</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
     
-        error if called outside a child class
-    
-    </div>
-
-
-    
-
-
 
 
 
@@ -583,13 +296,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Diff.html">Diff</a></li><li><a href="Line.html">Line</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#constructormethod">constructor method</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-main.html">main</a></li><li><a href="module-utils_Fmt.html">utils/Fmt</a></li><li><a href="module-utils_Out.html">utils/Out</a></li><li><a href="module-utils_Pt.html">utils/Pt</a></li><li><a href="module-utils_Tokenize.html">utils/Tokenize</a></li></ul><h3>Classes</h3><ul><li><a href="Files.html">Files</a></li><li><a href="LCS.html">LCS</a></li><li><a href="Line.html">Line</a></li><li><a href="Node.html">Node</a></li><li><a href="Segment.html">Segment</a></li><li><a href="Single.html">Single</a></li><li><a href="Tree.html">Tree</a></li><li><a href="Word.html">Word</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getLineDiff">getLineDiff</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Sep 24 2019 23:09:01 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Sep 26 2019 19:43:38 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -10,6 +10,7 @@ program
 
   const indentation =["","  ","    ","      ", "        ", "          "]
   const print = (level, obj) => {
+    // print string
     if(typeof obj === 'string') {
       console.log(indentation[level],obj);
       return
@@ -18,10 +19,11 @@ program
     if(typeof obj === 'object') {
       level++
       if(Array.isArray(obj)) {
-        obj.forEach( o => print(level,o))
+        return obj.forEach( o => print(level,o))
       }
+      // print header in gray 
       if(obj.header) {
-        console.log(chalk.gray(indentation[level],obj.header));
+        console.log(chalk.gray(indentation[level-1],obj.header));
       }
       if(obj.body) {
         return print(level,obj.body)
@@ -40,6 +42,6 @@ program
       console.log('\n');
     })
   })
-  // .catch( err => {
-  //   console.error("Error: ",err.message)
-  // })
+  .catch( err => {
+    console.error("Error: ",err.message)
+  })
